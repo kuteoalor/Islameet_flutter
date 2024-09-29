@@ -1,16 +1,20 @@
-# islameet
+# ISLAMEET
 
-A new Flutter project.
+Современное приложение для знакомств с упором на мусульманскую аудиторию
 
-## Getting Started
+# Стек технологий:
+  Flutter
+  - State management: Bloc
+  - DI: Injectable + GetIt
+  - Navigation: TBD (Autoroute / Navigator 2.0)
+  - Networking: TBD (Dio / Dart http)
 
-This project is a starting point for a Flutter application.
+# Прототипы страниц:
+https://www.figma.com/design/PLLBZb7c2b7wEX14ln7syv/%D0%B8%D1%81%D0%BB%D0%B0%D0%BC%D0%B8%D1%82?node-id=0-1&node-type=canvas&t=RuMGwARlK9DXs5aI-0
 
-A few resources to get you started if this is your first Flutter project:
+# API Сервера:
+TBD
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
