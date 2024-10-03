@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:islameet/presentation/utils/constants.dart';
+import 'package:islameet/presentation/widgets/islameet_form_field.dart';
+import 'package:islameet/presentation/widgets/islameet_golden_button.dart';
+import 'package:islameet/presentation/widgets/islameet_label.dart';
+import 'package:islameet/presentation/widgets/islameet_outlined_button.dart';
+import 'package:islameet/presentation/widgets/register_card.dart';
+import 'package:islameet/presentation/widgets/sign_in_card.dart';
 import 'package:islameet/presentation/widgets/welcome_card.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -10,39 +13,19 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Stack(
         children: [
-          const Positioned.fill(
+          Positioned.fill(
             child: Image(
               image: AssetImage('images/background.png'),
               fit: BoxFit.cover,
             ),
           ),
-          Center(
-            child: ShaderMask(
-              shaderCallback: (bounds) {
-                return gradient.createShader(
-                  Rect.fromLTWH(0, 0, bounds.width, bounds.height),
-                );
-              },
-              child: Text(
-                'Islameet',
-                style: GoogleFonts.montserrat(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 80,
-                    color: Colors.transparent,
-                    shadows: [
-                      const BoxShadow(
-                        color: Colors.white,
-                        spreadRadius: 5,
-                        offset: Offset(1, 1),
-                      ),
-                    ]),
-              ),
-            ).animate().fadeOut(delay: 1.seconds, duration: 1.seconds),
-          ),
-          const WelcomeCard(gradient: gradient),
+          IslameetLabel(),
+          WelcomeCard(),
+          //SignInCard(),
+          //RegisterCard(),
         ],
       ),
     );

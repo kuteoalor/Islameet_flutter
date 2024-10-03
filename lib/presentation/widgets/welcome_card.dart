@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:gradient_elevated_button/gradient_elevated_button.dart';
+import 'package:islameet/presentation/widgets/islameet_golden_button.dart';
+import 'package:islameet/presentation/widgets/islameet_outlined_button.dart';
 
 class WelcomeCard extends StatelessWidget {
   const WelcomeCard({
     super.key,
-    required this.gradient,
   });
-
-  final LinearGradient gradient;
 
   @override
   Widget build(BuildContext context) {
@@ -67,49 +65,16 @@ class WelcomeCard extends StatelessWidget {
           const SizedBox(
             height: 40,
           ),
-          SizedBox(
-            width: 270,
-            height: 45,
-            child: GradientElevatedButton(
-              onPressed: () {},
-              style: GradientElevatedButton.styleFrom(
-                gradient: gradient,
-              ),
-              child: const Text(
-                'Войти',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
+          const IslameetGoldenButton(
+            label: 'Войти',
           ).animate(delay: 2.5.seconds).fadeIn(
                 duration: 1.3.seconds,
               ),
           const SizedBox(
             height: 10,
           ),
-          SizedBox(
-            width: 270,
-            height: 45,
-            child: OutlinedButton(
-              onPressed: () {},
-              style: const ButtonStyle(
-                side: WidgetStatePropertyAll(
-                  BorderSide(
-                    color: Colors.black,
-                    width: 1.5,
-                  ),
-                ),
-              ),
-              child: const Text(
-                'Создать аккаунт',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
+          const IslameetOutlinedButton(
+            label: 'Создать аккаунт',
           ).animate(delay: 2.6.seconds).fadeIn(
                 duration: 1.2.seconds,
               ),
