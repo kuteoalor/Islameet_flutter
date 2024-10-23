@@ -4,7 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:islameet/presentation/utils/constants.dart';
 
 class IslameetLabel extends StatelessWidget {
+  final Function({required bool isSignIn}) onComplete;
   const IslameetLabel({
+    required this.onComplete,
     super.key,
   });
 
@@ -31,7 +33,14 @@ class IslameetLabel extends StatelessWidget {
                 ),
               ]),
         ),
-      ).animate().fadeOut(delay: 1.seconds, duration: 1.seconds),
+      )
+          .animate(
+            delay: 2.seconds,
+            onComplete: (_) {
+              onComplete(isSignIn: false);
+            },
+          )
+          .fadeOut(delay: 1.seconds, duration: 1.seconds),
     );
   }
 }

@@ -3,77 +3,80 @@ import 'package:islameet/presentation/widgets/islameet_form_field.dart';
 import 'package:islameet/presentation/widgets/islameet_golden_button.dart';
 import 'package:islameet/presentation/widgets/islameet_outlined_button.dart';
 
-class RegisterCard extends StatelessWidget {
-  const RegisterCard({super.key});
+class CreateAccountCard extends StatelessWidget {
+  const CreateAccountCard({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
+          const Text(
             'Регистрация',
             style: TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.w600,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          IslameetFormField(
+          const IslameetFormField(
             hintText: 'Электронная почта',
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
-          IslameetFormField(
+          const IslameetFormField(
             hintText: 'Пароль',
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
-          IslameetFormField(
+          const IslameetFormField(
             hintText: 'Повторите пароль',
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           IslameetGoldenButton(
+            onPressed: () {},
             label: 'Продолжить',
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
-          Text(
+          const Text(
             '───────  или  ───────',
             style: TextStyle(
               fontWeight: FontWeight.w600,
               color: Colors.black,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           IslameetOutlinedButton(
             label: 'Продолжить с Google',
-            icon: Icon(
+            onPressed: () {},
+            icon: const Icon(
               Icons.g_mobiledata_sharp,
               color: Colors.black,
               size: 30,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           IslameetOutlinedButton(
+            onPressed: () {},
             label: 'Продолжить с Facebook',
-            icon: Icon(
+            icon: const Icon(
               Icons.facebook_outlined,
               color: Colors.black,
             ),

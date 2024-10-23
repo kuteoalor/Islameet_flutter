@@ -3,11 +3,20 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:islameet/presentation/widgets/islameet_golden_button.dart';
 import 'package:islameet/presentation/widgets/islameet_outlined_button.dart';
 
-class WelcomeCard extends StatelessWidget {
+class WelcomeCard extends StatefulWidget {
+  final Function({required bool isSignIn}) nextPage;
   const WelcomeCard({
+    required this.nextPage,
     super.key,
   });
 
+  @override
+  State<WelcomeCard> createState() => _WelcomeCardState();
+}
+
+class _WelcomeCardState extends State<WelcomeCard> {
+  double target = 1;
+  bool toRegister = false;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -23,7 +32,9 @@ class WelcomeCard extends StatelessWidget {
               fontWeight: FontWeight.w600,
               height: 1.2,
             ),
-          ).animate(delay: 2.seconds).fadeIn(duration: 1.seconds),
+          )
+              .animate(delay: 0.seconds, target: target)
+              .fadeIn(duration: 1.seconds),
           const SizedBox(
             height: 20,
           ),
@@ -59,23 +70,39 @@ class WelcomeCard extends StatelessWidget {
                 ),
               ],
             ),
-          ).animate(delay: 2.3.seconds).fadeIn(
+          ).animate(delay: 0.3.seconds, target: target).fadeIn(
                 duration: 1.2.seconds,
               ),
           const SizedBox(
             height: 40,
           ),
-          const IslameetGoldenButton(
+          IslameetGoldenButton(
+            onPressed: () => setState(() {
+              target = 0;
+            }),
             label: 'Войти',
-          ).animate(delay: 2.5.seconds).fadeIn(
+          ).animate(delay: 0.5.seconds, target: target).fadeIn(
                 duration: 1.3.seconds,
               ),
           const SizedBox(
             height: 10,
           ),
-          const IslameetOutlinedButton(
+          IslameetOutlinedButton(
+            onPressed: () => setState(() {
+              target = 0;
+              toRegister = true;
+            }),
             label: 'Создать аккаунт',
-          ).animate(delay: 2.6.seconds).fadeIn(
+          )
+              .animate(
+                  delay: 0.6.seconds,
+                  target: target,
+                  onComplete: (_) {
+                    if (target == 0) {
+                      widget.nextPage(isSignIn: toRegister);
+                    }
+                  })
+              .fadeIn(
                 duration: 1.2.seconds,
               ),
         ],

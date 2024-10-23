@@ -4,9 +4,11 @@ import 'package:islameet/presentation/utils/constants.dart';
 
 class IslameetGoldenButton extends StatelessWidget {
   final String label;
+  final VoidCallback onPressed;
   const IslameetGoldenButton({
     super.key,
     required this.label,
+    required this.onPressed,
   });
 
   @override
@@ -15,7 +17,7 @@ class IslameetGoldenButton extends StatelessWidget {
       width: 270,
       height: 45,
       child: GradientElevatedButton(
-        onPressed: () {},
+        onPressed: onPressed,
         style: GradientElevatedButton.styleFrom(
           gradient: gradient,
         ),
