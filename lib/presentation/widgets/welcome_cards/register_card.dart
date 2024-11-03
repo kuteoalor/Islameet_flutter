@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:islameet/presentation/widgets/islameet_form_field.dart';
 import 'package:islameet/presentation/widgets/islameet_golden_button.dart';
 import 'package:islameet/presentation/widgets/islameet_outlined_button.dart';
+import 'package:http/http.dart' as http;
 
 class RegisterCard extends StatefulWidget {
   final Function({required bool isSignIn}) nextPage;
@@ -13,6 +16,9 @@ class RegisterCard extends StatefulWidget {
 }
 
 class _RegisterCardState extends State<RegisterCard> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final repeatPasswordController = TextEditingController();
   double target = 1;
   @override
   Widget build(BuildContext context) {
@@ -33,7 +39,8 @@ class _RegisterCardState extends State<RegisterCard> {
           const SizedBox(
             height: 20,
           ),
-          const IslameetFormField(
+          IslameetFormField(
+            controller: emailController,
             hintText: 'Электронная почта',
           )
               .animate(delay: 0.2.seconds, target: target)
@@ -41,7 +48,8 @@ class _RegisterCardState extends State<RegisterCard> {
           const SizedBox(
             height: 10,
           ),
-          const IslameetFormField(
+          IslameetFormField(
+            controller: passwordController,
             hintText: 'Пароль',
           )
               .animate(delay: 0.4.seconds, target: target)
@@ -49,8 +57,9 @@ class _RegisterCardState extends State<RegisterCard> {
           const SizedBox(
             height: 10,
           ),
-          const IslameetFormField(
+          IslameetFormField(
             hintText: 'Повторите пароль',
+            controller: repeatPasswordController,
           )
               .animate(delay: 0.6.seconds, target: target)
               .fadeIn(duration: 1.seconds),
@@ -58,9 +67,27 @@ class _RegisterCardState extends State<RegisterCard> {
             height: 10,
           ),
           IslameetGoldenButton(
-            onPressed: () => setState(() {
-              target = 0;
-            }),
+            onPressed: () async {
+              String url = 'localhost:6100';
+              final response = await http.put(Uri.http(url, '/token'),
+                  headers: {
+                    'content-type': 'application/json; charset=utf-8',
+                  },
+                  body: jsonEncode({
+                    'email': 'gabela', //emailController.text,
+                    'password': 'mama' //passwordController.text
+                  }));
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  //content: Text((jsonDecode(response.body)
+                  //    as Map<String, dynamic>)['message']),
+                  content: Text(response.statusCode.toString()),
+                ),
+              );
+              setState(() {
+                target = 0;
+              });
+            },
             label: 'Продолжить',
           )
               .animate(delay: 0.8.seconds, target: target)

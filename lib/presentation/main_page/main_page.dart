@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:islameet/presentation/utils/constants.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});

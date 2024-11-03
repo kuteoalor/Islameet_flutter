@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:islameet/presentation/widgets/islameet_form_field.dart';
 import 'package:islameet/presentation/widgets/islameet_golden_button.dart';
 import 'package:islameet/presentation/widgets/islameet_outlined_button.dart';
+import 'package:http/http.dart' as http;
 
 class SignInCard extends StatefulWidget {
   final Function({required bool isSignIn}) nextPage;
@@ -13,6 +16,8 @@ class SignInCard extends StatefulWidget {
 }
 
 class _SignInCardState extends State<SignInCard> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   double target = 1;
   @override
   Widget build(BuildContext context) {
@@ -33,7 +38,8 @@ class _SignInCardState extends State<SignInCard> {
           const SizedBox(
             height: 20,
           ),
-          const IslameetFormField(
+          IslameetFormField(
+            controller: emailController,
             hintText: 'Электронная почта',
           )
               .animate(delay: 0.3.seconds, target: target)
@@ -41,7 +47,8 @@ class _SignInCardState extends State<SignInCard> {
           const SizedBox(
             height: 10,
           ),
-          const IslameetFormField(
+          IslameetFormField(
+            controller: passwordController,
             hintText: 'Пароль',
           )
               .animate(delay: 0.5.seconds, target: target)
@@ -51,9 +58,23 @@ class _SignInCardState extends State<SignInCard> {
           ),
           IslameetGoldenButton(
             label: 'Войти',
-            onPressed: () {
+            onPressed: () async {
+              String url = 'localhost:6100';
+              final response = await http.post(Uri.http(url, '/token'),
+                  headers: {
+                    'content-type': 'application/json; charset=utf-8',
+                  },
+                  body: jsonEncode({
+                    'email': emailController.text, //emailController.text,
+                    'password':
+                        passwordController.text, //passwordController.text
+                  }));
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(response.statusCode.toString()),
+                ),
+              );
               setState(() => target = 0);
-              //widget.nextPage(isSignIn: true);
             },
           )
               .animate(delay: 0.7.seconds, target: target)

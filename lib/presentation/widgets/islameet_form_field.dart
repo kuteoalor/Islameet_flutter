@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class IslameetFormField extends StatelessWidget {
+  final TextEditingController? controller;
   final String hintText;
   final int? minLines;
   const IslameetFormField({
     super.key,
     required this.hintText,
+    this.controller,
     this.minLines,
   });
 
@@ -23,10 +25,11 @@ class IslameetFormField extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(
             left: 20,
-            bottom: 10,
+            bottom: 5,
             //vertical: 1,
           ),
           child: TextFormField(
+            controller: controller,
             minLines: minLines,
             maxLines: 10,
             style: const TextStyle(

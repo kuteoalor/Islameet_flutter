@@ -7,10 +7,7 @@ import 'package:islameet/presentation/widgets/welcome_cards/account_creation/ded
 import 'package:islameet/presentation/widgets/welcome_cards/account_creation/gender_selection_card.dart';
 import 'package:islameet/presentation/widgets/welcome_cards/account_creation/select_photo_card.dart';
 import 'package:islameet/presentation/widgets/welcome_cards/get_acquainted.dart';
-import 'package:islameet/presentation/widgets/islameet_form_field.dart';
-import 'package:islameet/presentation/widgets/islameet_golden_button.dart';
 import 'package:islameet/presentation/widgets/welcome_cards/islameet_label.dart';
-import 'package:islameet/presentation/widgets/islameet_outlined_button.dart';
 import 'package:islameet/presentation/widgets/welcome_cards/register_card.dart';
 import 'package:islameet/presentation/widgets/welcome_cards/sign_in_card.dart';
 import 'package:islameet/presentation/widgets/welcome_cards/welcome_card.dart';

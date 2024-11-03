@@ -44,20 +44,34 @@ class _SelectPhotoCardState extends State<SelectPhotoCard> {
                     size: 200,
                   ),
                 ),
-                Container(
-                  width: 200,
-                  height: 40,
-                  alignment: Alignment.center,
-                  color: const Color.fromARGB(255, 215, 188, 240),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.upload_file),
-                      SizedBox(
-                        width: 5,
+                Material(
+                  child: InkWell(
+                    onTap: () {},
+                    hoverColor: Colors.red,
+                    focusColor: Colors.amber,
+                    splashColor: Colors.green,
+                    //  overlayColor: const WidgetStatePropertyAll(Colors.blue),
+                    highlightColor: Colors.purple,
+                    onHover: (value) {
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(SnackBar(content: Text('Hover')));
+                    },
+                    child: Container(
+                      width: 200,
+                      height: 40,
+                      alignment: Alignment.center,
+                      //color: const Color.fromARGB(255, 215, 188, 240),
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.upload_file),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text('Загрузить фото'),
+                        ],
                       ),
-                      Text('Загрузить фото'),
-                    ],
+                    ),
                   ),
                 ),
               ],
