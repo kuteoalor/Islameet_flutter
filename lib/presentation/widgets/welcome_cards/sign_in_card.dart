@@ -2,6 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:islameet/presentation/main_page/main_page.dart';
+import 'package:islameet/presentation/welcome_page/auth_cubit.dart';
 import 'package:islameet/presentation/widgets/islameet_form_field.dart';
 import 'package:islameet/presentation/widgets/islameet_golden_button.dart';
 import 'package:islameet/presentation/widgets/islameet_outlined_button.dart';
@@ -50,6 +53,7 @@ class _SignInCardState extends State<SignInCard> {
           IslameetFormField(
             controller: passwordController,
             hintText: 'Пароль',
+            isObscured: true,
           )
               .animate(delay: 0.5.seconds, target: target)
               .fadeIn(duration: 1.seconds),
@@ -69,6 +73,12 @@ class _SignInCardState extends State<SignInCard> {
                     'password':
                         passwordController.text, //passwordController.text
                   }));
+              final body = json.decode(response.body) as Map<String, dynamic>;
+              print(body['data']);
+              int id = body['data']['id'];
+              print(id);
+              BlocProvider.of<AuthCubit>(context).setId(id);
+              BlocProvider.of<AuthCubit>(context).setPrefs();
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(response.statusCode.toString()),
@@ -141,7 +151,12 @@ class _SignInCardState extends State<SignInCard> {
                 target: target,
                 onComplete: (_) {
                   if (target == 0) {
-                    widget.nextPage(isSignIn: true);
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const MainPage(),
+                      ),
+                    );
+                    //widget.nextPage(isSignIn: true);
                   }
                 },
               )

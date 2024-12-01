@@ -4,11 +4,13 @@ class IslameetFormField extends StatelessWidget {
   final TextEditingController? controller;
   final String hintText;
   final int? minLines;
+  final bool isObscured;
   const IslameetFormField({
     super.key,
     required this.hintText,
     this.controller,
     this.minLines,
+    this.isObscured = false,
   });
 
   @override
@@ -31,7 +33,8 @@ class IslameetFormField extends StatelessWidget {
           child: TextFormField(
             controller: controller,
             minLines: minLines,
-            maxLines: 10,
+            obscureText: isObscured,
+            maxLines: isObscured ? 1 : 10,
             style: const TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w600,

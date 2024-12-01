@@ -9,16 +9,19 @@ class User {
   String description;
   String city;
   int age;
+  bool isMale;
+  String name;
 
-  User({
-    required this.id,
-    required this.email,
-    required this.birthday,
-    required this.photoURL,
-    required this.description,
-    required this.city,
-    required this.age,
-  });
+  User(
+      {required this.id,
+      required this.email,
+      required this.birthday,
+      required this.photoURL,
+      required this.description,
+      required this.city,
+      required this.age,
+      required this.isMale,
+      required this.name});
 
   User copyWith({
     int? id,
@@ -28,6 +31,8 @@ class User {
     String? description,
     String? city,
     int? age,
+    bool? isMale,
+    String? name,
   }) {
     return User(
       id: id ?? this.id,
@@ -37,6 +42,8 @@ class User {
       description: description ?? this.description,
       city: city ?? this.city,
       age: age ?? this.age,
+      isMale: isMale ?? this.isMale,
+      name: name ?? this.name,
     );
   }
 
@@ -61,6 +68,8 @@ class User {
       description: map['description'] as String,
       city: map['city'] as String,
       age: map['age'] as int,
+      name: map['name'] as String,
+      isMale: map['isMale'] as bool,
     );
   }
 

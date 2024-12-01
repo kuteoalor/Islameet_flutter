@@ -50,6 +50,7 @@ class _RegisterCardState extends State<RegisterCard> {
           ),
           IslameetFormField(
             controller: passwordController,
+            isObscured: true,
             hintText: 'Пароль',
           )
               .animate(delay: 0.4.seconds, target: target)
@@ -59,6 +60,7 @@ class _RegisterCardState extends State<RegisterCard> {
           ),
           IslameetFormField(
             hintText: 'Повторите пароль',
+            isObscured: true,
             controller: repeatPasswordController,
           )
               .animate(delay: 0.6.seconds, target: target)
@@ -74,8 +76,8 @@ class _RegisterCardState extends State<RegisterCard> {
                     'content-type': 'application/json; charset=utf-8',
                   },
                   body: jsonEncode({
-                    'email': 'gabela', //emailController.text,
-                    'password': 'mama' //passwordController.text
+                    'email': emailController.text,
+                    'password': passwordController.text
                   }));
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(

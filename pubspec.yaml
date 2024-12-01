@@ -29,7 +29,10 @@ dependencies:
   gradient_elevated_button: ^1.0.0
   glassmorphism: ^3.0.0
   fadingpageview: ^1.0.0
+  flutter_bloc: ^8.1.6
+  web_socket_channel: ^3.0.1
   http: ^1.2.2
+  shared_preferences: ^2.3.3
 
 dev_dependencies:
   flutter_test:
