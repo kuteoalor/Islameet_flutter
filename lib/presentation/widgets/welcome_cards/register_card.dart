@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:islameet/presentation/welcome_page/auth_cubit.dart';
 import 'package:islameet/presentation/widgets/islameet_form_field.dart';
 import 'package:islameet/presentation/widgets/islameet_golden_button.dart';
 import 'package:islameet/presentation/widgets/islameet_outlined_button.dart';
@@ -79,6 +81,17 @@ class _RegisterCardState extends State<RegisterCard> {
                     'email': emailController.text,
                     'password': passwordController.text
                   }));
+              final body = jsonDecode(response.body) as Map<String, dynamic>;
+              int id = body['data']['id'];
+              String accessToken = body['data']['accessToken'];
+              String refreshToken = body['data']['refreshToken'];
+              print('ACCESS TOKEN: $accessToken');
+              BlocProvider.of<AuthCubit>(context).setId(id);
+              BlocProvider.of<AuthCubit>(context)
+                  .setEmail(emailController.text);
+              BlocProvider.of<AuthCubit>(context).setAccessToken(accessToken);
+              BlocProvider.of<AuthCubit>(context).setRefreshToken(refreshToken);
+              BlocProvider.of<AuthCubit>(context).setPrefs();
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   //content: Text((jsonDecode(response.body)

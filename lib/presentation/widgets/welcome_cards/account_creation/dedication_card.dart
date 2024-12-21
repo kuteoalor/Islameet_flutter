@@ -46,25 +46,7 @@ class _DedicationCardState extends State<DedicationCard> {
           ),
           SizedBox(
             width: 270,
-            child: const Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(20),
-                ),
-              ),
-              color: Color.fromRGBO(245, 245, 245, 0.3),
-              shadowColor: Colors.transparent,
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 8),
-                child: Text(
-                  'Серьезные отношения',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-            )
+            child: DedicationButton(label: 'Серьезные отношения')
                 .animate(delay: 0.1.seconds, target: target)
                 .fadeIn(duration: 1.seconds),
           ),
@@ -73,24 +55,8 @@ class _DedicationCardState extends State<DedicationCard> {
           ),
           SizedBox(
             width: 270,
-            child: const Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(20),
-                ),
-              ),
-              color: Color.fromRGBO(245, 245, 245, 0.3),
-              shadowColor: Colors.transparent,
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 8),
-                child: Text(
-                  'Дружеское общение',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
+            child: const DedicationButton(
+              label: 'Дружеское общение',
             )
                 .animate(delay: 0.2.seconds, target: target)
                 .fadeIn(duration: 1.seconds),
@@ -100,24 +66,8 @@ class _DedicationCardState extends State<DedicationCard> {
           ),
           SizedBox(
             width: 270,
-            child: const Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(20),
-                ),
-              ),
-              color: Color.fromRGBO(245, 245, 245, 0.3),
-              shadowColor: Colors.transparent,
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 8),
-                child: Text(
-                  'Решу, когда встречу',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
+            child: const DedicationButton(
+              label: 'Решу, когда встречу',
             )
                 .animate(delay: 0.3.seconds, target: target)
                 .fadeIn(duration: 1.seconds),
@@ -142,6 +92,37 @@ class _DedicationCardState extends State<DedicationCard> {
               )
               .fadeIn(duration: 1.seconds),
         ],
+      ),
+    );
+  }
+}
+
+class DedicationButton extends StatelessWidget {
+  final String label;
+  const DedicationButton({
+    super.key,
+    required this.label,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(20),
+        ),
+      ),
+      color: const Color.fromRGBO(245, 245, 245, 0.3),
+      shadowColor: Colors.transparent,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        child: Text(
+          label,
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            fontWeight: FontWeight.w600,
+          ),
+        ),
       ),
     );
   }

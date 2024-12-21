@@ -4,7 +4,7 @@ import 'package:islameet/presentation/utils/constants.dart';
 
 class IslameetGoldenButton extends StatelessWidget {
   final String label;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   const IslameetGoldenButton({
     super.key,
     required this.label,

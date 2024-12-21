@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class IslameetFormField extends StatelessWidget {
   final TextEditingController? controller;
+  final Function(String)? onChanged;
   final String hintText;
   final int? minLines;
   final bool isObscured;
@@ -10,6 +11,7 @@ class IslameetFormField extends StatelessWidget {
     required this.hintText,
     this.controller,
     this.minLines,
+    this.onChanged,
     this.isObscured = false,
   });
 
@@ -34,6 +36,7 @@ class IslameetFormField extends StatelessWidget {
             controller: controller,
             minLines: minLines,
             obscureText: isObscured,
+            onChanged: onChanged,
             maxLines: isObscured ? 1 : 10,
             style: const TextStyle(
               fontSize: 13,

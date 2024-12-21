@@ -3,8 +3,6 @@ import 'dart:convert';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:islameet/data/models/message.dart';
 import 'package:islameet/presentation/chat_screen/chat_state.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:web_socket_channel/html.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 const wsUrl = 'ws://127.0.0.1:6100/connect';

@@ -44,7 +44,6 @@ class _WelcomePageState extends State<WelcomePage> {
     RegisterCard,
     GetAcquaintedCard,
     GenderSelectionCard,
-    DedicationCard,
     AboutCard,
     SelectPhotoCard,
   ];
@@ -77,8 +76,6 @@ class _WelcomePageState extends State<WelcomePage> {
                     return GetAcquaintedCard(nextPage: nextPage);
                   case GenderSelectionCard:
                     return GenderSelectionCard(nextPage: nextPage);
-                  case DedicationCard:
-                    return DedicationCard(nextPage: nextPage);
                   case AboutCard:
                     return AboutCard(nextPage: nextPage);
                   case SelectPhotoCard:

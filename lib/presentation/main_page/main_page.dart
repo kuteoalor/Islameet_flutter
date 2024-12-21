@@ -5,7 +5,6 @@ import 'package:islameet/presentation/main_page/main_page_cubit.dart';
 import 'package:islameet/presentation/main_page/main_page_state.dart';
 import 'package:islameet/presentation/pick_screen/pick_screen.dart';
 import 'package:islameet/presentation/side_panel_screen/side_panel.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});

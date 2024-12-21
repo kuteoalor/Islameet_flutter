@@ -76,8 +76,15 @@ class _SignInCardState extends State<SignInCard> {
               final body = json.decode(response.body) as Map<String, dynamic>;
               print(body['data']);
               int id = body['data']['id'];
+              String accessToken = body['data']['accessToken'];
+              String refreshToken = body['data']['refreshToken'];
+              print('ACCESS TOKEN: $accessToken');
               print(id);
               BlocProvider.of<AuthCubit>(context).setId(id);
+              BlocProvider.of<AuthCubit>(context)
+                  .setEmail(emailController.text);
+              BlocProvider.of<AuthCubit>(context).setAccessToken(accessToken);
+              BlocProvider.of<AuthCubit>(context).setRefreshToken(refreshToken);
               BlocProvider.of<AuthCubit>(context).setPrefs();
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(

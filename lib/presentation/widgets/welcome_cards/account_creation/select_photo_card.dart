@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:islameet/presentation/main_page/main_page.dart';
+import 'package:islameet/presentation/welcome_page/auth_cubit.dart';
 import 'package:islameet/presentation/widgets/islameet_golden_button.dart';
 
 class SelectPhotoCard extends StatefulWidget {
@@ -12,6 +17,8 @@ class SelectPhotoCard extends StatefulWidget {
 
 class _SelectPhotoCardState extends State<SelectPhotoCard> {
   double target = 1;
+  Image? image;
+  String? imageEncoded;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -33,48 +40,63 @@ class _SelectPhotoCardState extends State<SelectPhotoCard> {
           ),
           ClipRRect(
             borderRadius: BorderRadius.circular(14),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  color: const Color.fromARGB(255, 160, 97, 218),
-                  child: const Icon(
-                    Icons.person,
-                    color: Color.fromARGB(255, 193, 147, 232),
-                    size: 200,
-                  ),
-                ),
-                Material(
-                  child: InkWell(
-                    onTap: () {},
-                    hoverColor: Colors.red,
-                    focusColor: Colors.amber,
-                    splashColor: Colors.green,
-                    //  overlayColor: const WidgetStatePropertyAll(Colors.blue),
-                    highlightColor: Colors.purple,
-                    onHover: (value) {
-                      ScaffoldMessenger.of(context)
-                          .showSnackBar(SnackBar(content: Text('Hover')));
-                    },
-                    child: Container(
-                      width: 200,
-                      height: 40,
-                      alignment: Alignment.center,
-                      //color: const Color.fromARGB(255, 215, 188, 240),
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.upload_file),
-                          SizedBox(
-                            width: 5,
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(
+                maxWidth: 400,
+              ),
+              child: Container(
+                color: const Color.fromARGB(255, 160, 97, 218),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      child: image == null
+                          ? const Icon(
+                              Icons.person,
+                              color: Color.fromARGB(255, 193, 147, 232),
+                              size: 200,
+                            )
+                          : SizedBox(height: 300, child: image),
+                    ),
+                    Material(
+                      color: const Color.fromARGB(255, 215, 188, 240),
+                      child: InkWell(
+                        onTap: () async {
+                          final picker = ImagePicker();
+                          final pickedImage = await picker.pickImage(
+                              source: ImageSource.gallery);
+                          if (pickedImage != null) {
+                            final bytes = await pickedImage.readAsBytes();
+                            final base64img = base64Encode(bytes);
+                            setState(() {
+                              image = Image.memory(
+                                bytes,
+                                fit: BoxFit.fitHeight,
+                              );
+                              imageEncoded = base64img;
+                            });
+                          }
+                        },
+                        child: Container(
+                          width: image == null ? 200 : null,
+                          height: 40,
+                          alignment: Alignment.center,
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.upload_file),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text('Загрузить фото'),
+                            ],
                           ),
-                          Text('Загрузить фото'),
-                        ],
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
+              ),
             ),
           )
               .animate(delay: 0.1.seconds, target: target)
@@ -84,11 +106,17 @@ class _SelectPhotoCardState extends State<SelectPhotoCard> {
           ),
           IslameetGoldenButton(
             label: 'Создать аккаунт',
-            onPressed: () {
-              setState(() {
-                target = 0;
-              });
-            },
+            onPressed: image == null
+                ? null
+                : () {
+                    BlocProvider.of<AuthCubit>(context)
+                        .setPhotoURL(imageEncoded!);
+                    BlocProvider.of<AuthCubit>(context).setPrefs();
+                    BlocProvider.of<AuthCubit>(context).sendUserInfo();
+                    setState(() {
+                      target = 0;
+                    });
+                  },
           )
               .animate(
                 delay: 0.3.seconds,
